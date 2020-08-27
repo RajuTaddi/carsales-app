@@ -1,0 +1,77 @@
+<div>
+  <div *ngIf="isLoading; else Vehicles">
+    <mat-spinner class="spinner"></mat-spinner>
+  </div>
+  <ng-template #Vehicles>
+    <div class="container">
+      <div
+        class="flex-container"
+        fxLayoutGap="0.5rem"
+        fxLayout.gt-xs="row warp"
+        fxLayout.xs="center center"
+      >
+        <div
+          *ngFor="let vehicle of vehicles"
+          class="flex-item vehicle"
+          fxFlex.gt-md="1 1 20.9%"
+          fxFlex.gt-sm="0 0 32%"
+          fxFlex.gt-xs="0 0 48.5%"
+          fxFlex.xs="1 1 100%"
+        >
+          <mat-card>
+            <img
+              style="cursor: pointer;"
+              mat-card-image
+              src="{{ vehicle.photo }}"
+              [routerLink]="['/vehicledetails', vehicle.id]"
+            />
+            <mat-card-content>
+              <div class="flex-container" fxLayout="column center">
+                <div class="flex-item" fxFlex="1 1 100%">
+                  <h1 class="title-header">
+                    <span class="dt">{{ getTitle(vehicle.title) }}</span>
+                  </h1>
+                </div>
+                <div class="flex-item" fxFlex="1 1 100%">
+                  <div class="flex-container" fxLayout="row start">
+                    <div class="flex-item" fxFlex="1 1 18%">
+                      <span class="dt">Year</span>
+                    </div>
+                    <div class="flex-item" fxFlex="1 1 70%">
+                      <span class="dd">: {{ year }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex-item" fxFlex="1 1 100%">
+                  <div class="flex-container" fxLayout="row start">
+                    <div class="flex-item" fxFlex="1 1 18%">
+                      <span class="dt">Price</span>
+                    </div>
+                    <div class="flex-item" fxFlex="1 1 70%">
+                      <span class="dd">: ${{ vehicle.price | number }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+            <mat-card-actions>
+              <button
+                tabindex="0"
+                mat-button
+                variant="primary"
+                [routerLink]="['/vehicledetails', vehicle.id]"
+              >
+                VIEW
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+        <!-- <div class="blocks">
+        <button button="submit" mat-raised-button color="primary">
+          <mat-icon>add</mat-icon> Add Post
+        </button>
+      </div> -->
+      </div>
+    </div>
+  </ng-template>
+</div>
